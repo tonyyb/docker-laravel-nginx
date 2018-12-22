@@ -38,4 +38,3 @@ RUN apk add --no-cache --virtual .build-deps \
     && apk del -f .build-deps
 
 WORKDIR /var/www
-

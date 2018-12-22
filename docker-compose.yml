@@ -1,0 +1,55 @@
+version: '3'
+services:
+
+  nginx:
+    image: tonyyb/laravel-nginx:latest
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8080:80"
+      - "8043:443"
+    volumes:
+      - ./:/var/www
+    networks:
+      - app-network
+
+  php-fpm:
+    image: tonyyb/laravel-php:7.2
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./:/var/www
+    networks:
+      - app-network
+    environment:
+      APP_ENV: "production"
+      APP_DEBUG: "false"
+      DB_CONNECTION: "mysql"
+      DB_HOST: "mysql"
+      DB_DATABASE: ${MYSQL_DATABASE}
+      DB_USERNAME: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+
+  mysql:
+    image: mysql:5.7
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8006:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    networks:
+      - app-network
+
+volumes:
+  mysqldata:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge
