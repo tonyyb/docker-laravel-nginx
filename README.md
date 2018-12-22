@@ -1,7 +1,5 @@
 # Docker images for Laravel development
 [![Travis](https://img.shields.io/travis/tonyyb/docker-laravel-nginx.svg?maxAge=1800&style=flat-square)](https://travis-ci.org/tonyyb/docker-laravel-nginx)
-[![Docker Build Status](https://img.shields.io/docker/build/tonyyb/laravel-php.svg?style=flat-square)](https://hub.docker.com/r/tonyyb/laravel-php)
-[![Docker Build Status](https://img.shields.io/docker/build/tonyyb/laravel-nginx.svg?style=flat-square)](https://hub.docker.com/r/tonyyb/laravel-nginx)
 
 ## Requirements
 
