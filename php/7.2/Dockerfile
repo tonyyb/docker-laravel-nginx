@@ -23,6 +23,7 @@ RUN apk add --no-cache --virtual .build-deps \
         libintl \
         icu \
         icu-dev \
+        nodejs \
     && pecl install imagick \
     && docker-php-ext-enable imagick \
     && docker-php-ext-install \
