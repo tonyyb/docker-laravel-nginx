@@ -27,6 +27,8 @@ RUN apk add --no-cache --virtual .build-deps \
         nodejs \
         nodejs-npm \
         yarn \
+    && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted \
+        gnu-libiconv \
     && pecl install imagick \
     && docker-php-ext-enable imagick \
     && docker-php-ext-install \
@@ -48,5 +50,8 @@ RUN apk add --no-cache --virtual .build-deps \
     && docker-php-ext-install gd \
     && curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer \
     && apk del -f .build-deps
+
+# Fix for iconv: https://github.com/docker-library/php/issues/240
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 WORKDIR /var/www
