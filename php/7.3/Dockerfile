@@ -20,6 +20,7 @@ RUN apk add --no-cache --virtual .build-deps \
         git \
         imagemagick \
         mysql-client \
+        openssh-client \
         postgresql-libs \
         libintl \
         icu \
