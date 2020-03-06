@@ -32,6 +32,7 @@ RUN apk add --no-cache --virtual .build-deps \
         gnu-libiconv \
     && pecl install imagick \
     && docker-php-ext-enable imagick \
+    && docker-php-ext-configure exif \
     && docker-php-ext-install \
         bcmath \
         curl \
@@ -46,6 +47,7 @@ RUN apk add --no-cache --virtual .build-deps \
         xml \
         zip \
         intl \
+        exif \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-configure zip --with-libzip=/usr/include/ \
     && docker-php-ext-install gd \
