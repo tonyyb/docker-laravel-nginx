@@ -14,7 +14,7 @@ RUN apk add --no-cache --virtual .build-deps \
         libmcrypt-dev \
         freetype-dev  \
         libjpeg-turbo-dev \
-        libzip-dev \
+        zlib-dev \
     && apk add --no-cache \
         curl \
         git \
@@ -28,6 +28,7 @@ RUN apk add --no-cache --virtual .build-deps \
         nodejs \
         nodejs-npm \
         yarn \
+        libzip-dev \
     && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted \
         gnu-libiconv \
     && pecl install imagick \
@@ -45,12 +46,11 @@ RUN apk add --no-cache --virtual .build-deps \
         pcntl \
         tokenizer \
         xml \
-        zip \
         intl \
         exif \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-configure zip --with-libzip=/usr/include/ \
     && docker-php-ext-install gd \
+    && docker-php-ext-install zip \
     && curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer \
     && apk del -f .build-deps
 
