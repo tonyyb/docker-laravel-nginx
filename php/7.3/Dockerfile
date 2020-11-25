@@ -16,6 +16,7 @@ RUN apk add --no-cache --virtual .build-deps \
         libjpeg-turbo-dev \
         zlib-dev \
     && apk add --no-cache \
+        bash \
         curl \
         git \
         imagemagick \
@@ -51,7 +52,9 @@ RUN apk add --no-cache --virtual .build-deps \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
     && docker-php-ext-install zip \
-    && curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer \
+    && wget https://getcomposer.org/installer && cat installer | php -- --install-dir=/usr/local/bin/ --filename=composer \
+    && cat installer | php -- --1 --install-dir=/usr/local/bin/ --filename=composer1 \
+    && rm installer \
     && apk del -f .build-deps
 
 # Fix for iconv: https://github.com/docker-library/php/issues/240

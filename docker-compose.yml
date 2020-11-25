@@ -12,9 +12,11 @@ services:
       - ./:/var/www
     networks:
       - app-network
+    depends_on:
+      - php-fpm
 
   php-fpm:
-    image: tonyyb/laravel-php:7.2
+    image: tonyyb/laravel-php:latest
     restart: unless-stopped
     tty: true
     volumes:

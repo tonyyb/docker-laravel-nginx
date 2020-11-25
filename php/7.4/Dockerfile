@@ -18,6 +18,7 @@ RUN apk add --no-cache --virtual .build-deps \
         zlib-dev \
         openldap-dev \
     && apk add --no-cache \
+        bash \
         curl \
         git \
         imagemagick \
@@ -55,7 +56,9 @@ RUN apk add --no-cache --virtual .build-deps \
         zip \
         xml \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer \
+    && wget https://getcomposer.org/installer && cat installer | php -- --install-dir=/usr/local/bin/ --filename=composer \
+    && cat installer | php -- --1 --install-dir=/usr/local/bin/ --filename=composer1 \
+    && rm installer \
     && apk del -f .build-deps
 
 WORKDIR /var/www
