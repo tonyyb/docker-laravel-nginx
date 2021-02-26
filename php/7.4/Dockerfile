@@ -32,6 +32,7 @@ RUN apk add --no-cache --virtual .build-deps \
         nodejs-npm \
         yarn \
         libzip-dev \
+        rsync \
     && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted \
         gnu-libiconv \
     && pecl install imagick \
