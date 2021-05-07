@@ -22,6 +22,7 @@ docker-compose up
 These docker images are configured in `docker-compose.yml` file. 
 You can comment or uncomment some services according to your project.
 
+* [`tonyyb/laravel-php:7.1`](https://hub.docker.com/r/tonyyb/laravel-php/)
 * [`tonyyb/laravel-php:7.2`](https://hub.docker.com/r/tonyyb/laravel-php/)
 * [`tonyyb/laravel-php:7.3`](https://hub.docker.com/r/tonyyb/laravel-php/)
 * [`tonyyb/laravel-php:7.4`](https://hub.docker.com/r/tonyyb/laravel-php/)
