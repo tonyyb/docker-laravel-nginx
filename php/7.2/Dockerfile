@@ -20,11 +20,11 @@ RUN apk add --no-cache --virtual .build-deps \
         git \
         imagemagick \
         mysql-client \
+        openssh-client \
         postgresql-libs \
         libintl \
         icu \
         icu-dev \
-    && apk add --update \
         nodejs \
         nodejs-npm \
         yarn \
