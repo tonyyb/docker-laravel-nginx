@@ -14,8 +14,8 @@ RUN apk add --no-cache --virtual .build-deps \
         sqlite-dev \
         libpng-dev \
         libmcrypt-dev \
-        libjpeg-turbo-dev 
-    RUN apk add --no-cache \
+        libjpeg-turbo-dev \
+    && apk add --no-cache \
         bash \
         curl \
         git \
@@ -30,13 +30,13 @@ RUN apk add --no-cache --virtual .build-deps \
         yarn \
         libzip-dev \
         rsync \
-        openldap-dev
-    RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted \
-        gnu-libiconv 
-    RUN pecl install imagick redis mongodb
-    RUN docker-php-ext-enable imagick redis mongodb
-    RUN docker-php-ext-configure exif 
-    RUN docker-php-ext-install \
+        openldap-dev \
+    && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted \
+        gnu-libiconv \
+    && pecl install imagick redis mongodb \
+    && docker-php-ext-enable imagick redis mongodb \
+    && docker-php-ext-configure exif \
+    && docker-php-ext-install \
         bcmath \
         exif \
         gd \
@@ -51,12 +51,12 @@ RUN apk add --no-cache --virtual .build-deps \
         pgsql \
         soap \
         zip \
-        xml
-    RUN apk add --no-cache libwebp-dev libpng-dev libjpeg-turbo-dev freetype-dev
-    RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp 
-    RUN wget https://getcomposer.org/installer && cat installer | php -- --install-dir=/usr/local/bin/ --filename=composer 
-    RUN cat installer | php -- --1 --install-dir=/usr/local/bin/ --filename=composer1 
-    RUN rm installer 
-    RUN apk del -f .build-deps
+        xml \
+    && apk add --no-cache libwebp-dev libpng-dev libjpeg-turbo-dev freetype-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+    && wget https://getcomposer.org/installer && cat installer | php -- --install-dir=/usr/local/bin/ --filename=composer \
+    && cat installer | php -- --1 --install-dir=/usr/local/bin/ --filename=composer1 \
+    && rm installer \
+    && apk del -f .build-deps
 
 WORKDIR /var/www
