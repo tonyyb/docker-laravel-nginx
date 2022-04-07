@@ -1,6 +1,6 @@
 # Docker images for Laravel development
-[![Travis](https://img.shields.io/travis/tonyyb/docker-laravel-nginx.svg?maxAge=1800&style=flat-square)](https://travis-ci.org/tonyyb/docker-laravel-nginx)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/tonyyb/docker-laravel-nginx/docker-image?label=Build)
+
+![Github Workflow](https://github.com/tonyyb/docker-laravel-nginx/actions/workflows/docker-image/badge.svg)
 
 ## Requirements
 
