@@ -3,9 +3,6 @@ name: Docker Image CI
 on:
   pull_request:
     branches: [ master ]
-    paths:
-      - '**/Dockerfile'
-      - '**/*.conf'
 
 jobs:
 
@@ -15,18 +12,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
 
-    - name: Get changed files
-      id: changed-files
-      uses: tj-actions/changed-files@v18.6
-
-    - name: List all changed files
-      run: |
-        for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-          echo "$file was changed"
-        done
-      
-      
-      
+    - name: Build php8.0
+      run: docker build -t test/php:8.0 php/8.0/
