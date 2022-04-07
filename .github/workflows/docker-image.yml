@@ -1,0 +1,17 @@
+name: Docker Image CI
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build php8.0
+      run: docker build -t test/php:8.0 php/8.0/
