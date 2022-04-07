@@ -32,6 +32,7 @@ RUN apk add --no-cache --virtual .build-deps \
         icu \
         icu-dev \
         nodejs \
+        npm \
         yarn \
         libzip-dev \
         rsync \
