@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine
+FROM php:8.1-fpm-alpine
 
 MAINTAINER tonyyb <dev@tony.botalla.me>
 
@@ -15,11 +15,6 @@ RUN apk add --no-cache --virtual .build-deps \
         libpng-dev \
         libmcrypt-dev \
         libjpeg-turbo-dev \
-        zlib-dev \
-        libwebp-dev \
-        libpng-dev \
-        libjpeg-turbo-dev \
-        freetype-dev \
     && apk add --no-cache \
         bash \
         curl \
@@ -38,9 +33,8 @@ RUN apk add --no-cache --virtual .build-deps \
         openldap-dev \
     && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted \
         gnu-libiconv \
-    && pecl install imagick \
-        redis \
-    && docker-php-ext-enable imagick redis \
+    && pecl install imagick redis mongodb \
+    && docker-php-ext-enable imagick redis mongodb \
     && docker-php-ext-configure exif \
     && docker-php-ext-install \
         bcmath \
@@ -56,9 +50,9 @@ RUN apk add --no-cache --virtual .build-deps \
         pdo_sqlite \
         pgsql \
         soap \
-        tokenizer \
         zip \
         xml \
+    && apk add --no-cache libwebp-dev libpng-dev libjpeg-turbo-dev freetype-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && wget https://getcomposer.org/installer && cat installer | php -- --install-dir=/usr/local/bin/ --filename=composer \
     && cat installer | php -- --1 --install-dir=/usr/local/bin/ --filename=composer1 \

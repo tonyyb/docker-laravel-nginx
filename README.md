@@ -26,6 +26,7 @@ You can comment or uncomment some services according to your project.
 * [`tonyyb/laravel-php:7.3`](https://hub.docker.com/r/tonyyb/laravel-php/)
 * [`tonyyb/laravel-php:7.4`](https://hub.docker.com/r/tonyyb/laravel-php/)
 * [`tonyyb/laravel-php:8.0`](https://hub.docker.com/r/tonyyb/laravel-php/)
+* [`tonyyb/laravel-php:8.1`](https://hub.docker.com/r/tonyyb/laravel-php/)
 * [`tonyyb/laravel-nginx:latest`](https://hub.docker.com/r/tonyyb/laravel-nginx/)
 * [`mysql:5.7`](https://hub.docker.com/_/mysql/) ;
 
