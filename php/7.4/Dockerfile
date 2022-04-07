@@ -36,6 +36,7 @@ RUN apk add --no-cache --virtual .build-deps \
         libzip-dev \
         rsync \
         openldap-dev \
+        npm \
     && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted \
         gnu-libiconv \
     && pecl install imagick \
