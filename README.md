@@ -1,6 +1,6 @@
 # Docker images for Laravel development
 
-![Github Workflow](https://github.com/tonyyb/docker-laravel-nginx/actions/workflows/docker-image/badge.svg)
+![Github Workflow](https://github.com/tonyyb/docker-laravel-nginx/actions/workflows/docker-image.yml/badge.svg)
 
 ## Requirements
 
