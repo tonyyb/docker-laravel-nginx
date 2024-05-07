@@ -29,10 +29,10 @@ RUN apk add --no-cache --virtual .build-deps \
         rsync \
         openldap-dev \
         npm \
-    && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted \
-        gnu-libiconv \
+        imagemagick-dev \
+    && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted gnu-libiconv \
+    && pecl install imagick && docker-php-ext-enable imagick \
     && pecl install redis \
-    && docker-php-ext-enable redis \
     && docker-php-ext-configure exif \
     && docker-php-ext-install \
         bcmath \
@@ -54,16 +54,6 @@ RUN apk add --no-cache --virtual .build-deps \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && wget https://getcomposer.org/installer && cat installer | php -- --install-dir=/usr/local/bin/ --filename=composer \
     && rm installer
-
-# Temporary hack : see https://github.com/Imagick/imagick/issues/643
-# Commit 52ec37ff633de0e5cca159a6437b8c340afe7831 refer to : https://github.com/Imagick/imagick/releases/tag/3.7.0
-RUN curl -L -o /tmp/imagick.tar.gz https://github.com/Imagick/imagick/archive/52ec37ff633de0e5cca159a6437b8c340afe7831.tar.gz \
-    && tar --strip-components=1 -xf /tmp/imagick.tar.gz \
-    && phpize \
-    && ./configure \
-    && make \
-    && make install \
-    && docker-php-ext-enable imagick
 
 ARG INSTALL_MONGO_DB=false
 RUN if [ ${INSTALL_MONGO_DB} = true ]; then \
