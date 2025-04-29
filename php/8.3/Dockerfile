@@ -1,7 +1,5 @@
 FROM php:8.3-fpm-alpine
 
-MAINTAINER tonyyb <dev@tony.botalla.me>
-
 RUN apk add --no-cache --virtual .build-deps \
         $PHPIZE_DEPS \
         curl-dev \
@@ -30,6 +28,7 @@ RUN apk add --no-cache --virtual .build-deps \
         openldap-dev \
         npm \
         imagemagick-dev \
+        linux-headers \
     && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted gnu-libiconv \
     && pecl install imagick && docker-php-ext-enable imagick \
     && pecl install redis \
@@ -53,16 +52,17 @@ RUN apk add --no-cache --virtual .build-deps \
     && apk add --no-cache libwebp-dev libpng-dev libjpeg-turbo-dev freetype-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && wget https://getcomposer.org/installer && cat installer | php -- --install-dir=/usr/local/bin/ --filename=composer \
-    && rm installer
-
-ARG INSTALL_MONGO_DB=false
-RUN if [ ${INSTALL_MONGO_DB} = true ]; then \
-      pecl install mongodb && \
-      docker-php-ext-enable redis mongodb \
-;fi
-
-# Clean up
-RUN apk del -f .build-deps \
+    && rm installer \
+    && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted gnu-libiconv \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
+    && apk del -f .build-deps \
     && rm -rf /tmp/*
 
+RUN  echo "[xdebug]" > /usr/local/etc/php/conf.d/xdebug.ini && \
+     echo "zend_extension=xdebug.so" >> /usr/local/etc/php/conf.d/xdebug.ini && \
+     echo "xdebug.mode=coverage" >> /usr/local/etc/php/conf.d/xdebug.ini && \
+     echo "xdebug.start_with_request=no" >> /usr/local/etc/php/conf.d/xdebug.ini
+
 WORKDIR /var/www
+
